@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd" default-autowire="byName">
+	
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> 
+		
+	<bean id="yl_man" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${ylman.driverClassName}" />
+		<property name="url" value="${ylman.url}" />		
+		<property name="username" value="${ylman.username}" />
+		<property name="password" value="${ylman.password}" />
+		<property name="initialSize" value="16"/>
+		<property name="maxActive" value="512"/>
+		<property name="maxIdle" value="16"/>
+		<property name="maxWait" value="3000"/>
+		<property name="validationQuery" value="select COUNT(*) from DUAL"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="timeBetweenEvictionRunsMillis" value="10000"/>
+		<property name="numTestsPerEvictionRun" value="5"/>
+		<property name="logAbandoned" value="true"/>
+		<property name="removeAbandoned" value="true"/>
+		<property name="removeAbandonedTimeout" value="300"/>  		
+	</bean>
+	
+	<bean id="sqlMapClient_yl_man" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="classpath:/sqlmaps/database.xml"/>
+		<property name="dataSource" ref="yl_man"/>
+    </bean>
+	
+</beans>

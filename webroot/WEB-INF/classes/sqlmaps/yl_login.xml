@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="login"> 
+	
+	 <resultMap class="com.yile.man.index.vo.User" id="user">
+		 <result property="id" column="id"></result>
+		 <result property="loginName" column="loginName"></result>
+		 <result property="userName" column="userName"></result>
+		 <result property="idetify" column="idetify"></result>
+		 <result property="loginTime" column="loginTime"></result>
+		 <result property="deptment" column="deptment"></result>
+		 <result property="loginCount" column="loginCount"></result>
+		 <result property="loginIp" column="loginIp"></result>
+    </resultMap>
+
+	<select id="login" parameterClass="com.yile.man.index.vo.User" resultMap="user">
+	    select id,loginName,userName,idetify,loginTime,deptment,loginCount,loginIp
+	    from yl.user where loginName=#loginName# and pwd=#pwd#
+	</select> 
+	
+	<update id="recodeUserHis" parameterClass="com.yile.man.index.vo.User" >
+	    update yl.user set loginTime=#loginTime#, loginCount=#loginCount#, loginIp= #loginIp# where loginName=#loginName#
+	</update> 
+	
+</sqlMap>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="fd"> 
+
+	 <resultMap class="com.yile.man.index.vo.FeedBack" id="fd">
+		 <result property="id" column="id"></result>
+		 <result property="fdContext" column="fdContext"></result>
+		 <result property="connect" column="connect"></result>
+		 <result property="companyName" column="companyName"></result>
+		 <result property="submitTime" column="submitTime"></result>
+    </resultMap>
+    
+    <insert id="insert"  parameterClass="com.yile.man.index.vo.FeedBack">
+	   insert into yl.fd (fdContext,connect,companyName,submitTime) values (#fdContext#,#connect#,#companyName#,#submitTime#)
+	    <selectKey resultClass="int" keyProperty="id">
+		   SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert> 
+
+	<select id="query"  parameterClass="com.yile.man.index.vo.Page" resultMap="fd">
+	   select id,fdContext,connect,companyName,submitTime from yl.fd limit #pageNo#,#pageSize# 
+	</select> 
+	
+	<select id="total"  resultClass="int">
+	   select count(1) from yl.fd
+	</select> 
+
+   <delete id="delete"  parameterClass="int">
+	   delete from  yl.fd where id=#id#
+	</delete> 
+	
+	<update id="update"  parameterClass="com.yile.man.index.vo.FeedBack">
+	    update yl.msg 
+	    <dynamic prepend="set">  
+		    <isNotNull prepend="," property="submitTime">  
+		        submitTime = #submitTime#  
+		    </isNotNull>  
+		   <isNotNull prepend="," property="companyName">  
+		     companyName = #companyName#  
+		   </isNotNull>  
+		   <isNotNull prepend="," property="connect">  
+		     connect = #connect#  
+		   </isNotNull>  
+		    <isNotNull prepend="," property="fdContext">  
+		     fdContext = #fdContext#  
+		   </isNotNull>  
+        </dynamic>   
+        where id=#id#
+	</update> 
+	
+	<delete id="deleteBatch"  parameterClass="list">
+      delete      
+      from  yl.fd 
+      where id in    
+      <iterate conjunction="," open="(" close=")">
+        #[]#
+      </iterate>
+    </delete>
+</sqlMap>

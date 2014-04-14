@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+ 	
+	<appender name="PROJECT" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/data/log/yile_man/man_log.log" /> 
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c{10}] - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="login" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/data/log/yile_man/login.log" /> 
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c{10}] - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="feedback" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/data/log/yile_man/feedback.log" /> 
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c{10}] - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="userman" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/data/log/yile_man/userman.log" /> 
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c{10}] - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="msgman" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/data/log/yile_man/msgman.log" /> 
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c{10}] - %m%n" />
+		</layout>
+	</appender>
+	 
+	<logger name="msgman" additivity="true">
+	   <level value="Info" />
+	   <appender-ref ref="msgman"/>
+	 </logger>
+	 
+	 <logger name="userman" additivity="true">
+	   <level value="Info" />
+	   <appender-ref ref="userman"/>
+	 </logger>
+	 
+	 <logger name="feedback" additivity="true">
+	   <level value="Info" />
+	   <appender-ref ref="feedback"/>
+	 </logger>
+	 
+	 <logger name="login" additivity="true">
+	   <level value="Info" />
+	   <appender-ref ref="login"/>
+	 </logger>
+
+	<!-- 关闭框架日志 -->
+	<logger name="org.springframework" additivity="false">
+			<level value="OFF"/>
+	</logger>
+	<logger name="freemarker.cache" additivity="false">
+			<level value="OFF"/>
+	</logger>
+	<logger name="freemarker.beans" additivity="false">
+			<level value="OFF"/>
+	</logger>
+	<logger name="java.sql" additivity="true">
+			<level value="OFF"/>
+	</logger>
+	<logger name="org.quartz" additivity="true">
+			<level value="OFF"/>
+	</logger>
+	<logger name="org.apache.struts2.config" additivity="true">
+			<level value="OFF"/>
+	</logger>
+		<logger name="com.opensymphony.xwork2" additivity="true">
+			<level value="OFF"/>
+	</logger>
+	<logger name="	org.apache.struts2.spring" additivity="true">
+			<level value="OFF"/>
+	</logger>
+    <!-- 关闭框架日志 -->
+
+	<root>
+		<level value="info" />
+		<appender-ref ref="PROJECT" />
+	</root>
+</log4j:configuration>

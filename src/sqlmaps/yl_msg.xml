@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="msg"> 
+
+	 <resultMap class="com.yile.man.index.vo.Msg" id="msg">
+		 <result property="id" column="id"></result>
+		 <result property="msgTitle" column="msgTitle"></result>
+		 <result property="releaseName" column="releaseName"></result>
+		 <result property="releaseTime" column="releaseTime"></result>
+		 <result property="remark" column="remark"></result>
+		 <result property="msgContenxt" column="msgContenxt"></result>
+    </resultMap>
+    
+    <insert id="insert"  parameterClass="com.yile.man.index.vo.Msg">
+	   insert into yl.msg (msgTitle,releaseName,releaseTime,remark,msgContenxt) values (#msgTitle#,#releaseName#,#releaseTime#,#remark#,#msgContenxt#)
+	    <selectKey resultClass="int" keyProperty="id">
+		   SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert> 
+
+	<select id="query"  parameterClass="com.yile.man.index.vo.Page" resultMap="msg">
+	   select id,msgTitle,releaseName,releaseTime,remark,msgContenxt from yl.msg limit #pageNo#,#pageSize# 
+	</select> 
+	
+	<select id="total"  resultClass="int">
+	   select count(1) from yl.msg
+	</select> 
+
+   <delete id="delete"  parameterClass="int">
+	   delete from  yl.msg where id=#id#
+	</delete> 
+	
+	<update id="update"  parameterClass="com.yile.man.index.vo.Msg">
+	    update yl.msg 
+	    <dynamic prepend="set">  
+		    <isNotNull prepend="," property="releaseTime">  
+		        releaseTime = #releaseTime#  
+		    </isNotNull>  
+		   <isNotNull prepend="," property="msgContenxt">  
+		     msgContenxt = #msgContenxt#  
+		   </isNotNull>  
+		   <isNotNull prepend="," property="msgTitle">  
+		     msgTitle = #msgTitle#  
+		   </isNotNull>  
+		    <isNotNull prepend="," property="remark">  
+		     remark = #remark#  
+		   </isNotNull>  
+        </dynamic>   
+        where id=#id#
+	</update> 
+	
+	<delete id="deleteBatch"  parameterClass="list">
+      delete      
+      from  yl.msg 
+      where id in    
+      <iterate conjunction="," open="(" close=")">
+        #[]#
+      </iterate>
+    </delete>
+    
+</sqlMap>

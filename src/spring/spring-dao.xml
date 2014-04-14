@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd" default-autowire="byName">
+	
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> 
+	
+	<bean id="loginDao" class="com.yile.man.index.dao.LoginDaoImpl">
+      <property name="sqlMapClient" ref="sqlMapClient_yl_man"></property>
+    </bean>
+    <bean id="fdDao" class="com.yile.man.index.dao.FdDaoImpl">
+      <property name="sqlMapClient" ref="sqlMapClient_yl_man"></property>
+    </bean>
+    <bean id="userDao" class="com.yile.man.index.dao.UserDaoImpl">
+      <property name="sqlMapClient" ref="sqlMapClient_yl_man"></property>
+    </bean>
+    <bean id="msgDao" class="com.yile.man.index.dao.MsgDaoImpl">
+      <property name="sqlMapClient" ref="sqlMapClient_yl_man"></property>
+    </bean>
+   
+</beans>
